@@ -1,0 +1,18 @@
+rjs - Remote JavaScript
+---------------
+
+# What is rjs?
+
+rjs allows the server to run JavaScript in the client.
+It’s Comet <http://en.wikipedia.org/wiki/Comet_(programming)>, if that helps.
+It aims to be fast, without the overhead common of other methods.
+
+# Building rjs
+
+rjs must be built with Adobe Flash CS3 or newer. Create a new ActionScript 3.0
+file and include rjs.as in the first frame. Publish the file as SWF.
+
+# Using rjs
+
+Both rjs.js and swfobject.js must be included. Look through the source for
+usage details.
