@@ -18,34 +18,47 @@
  */
 
 var rjs = {
-	init: function(options) {
-		this._options = options;
-		swfobject.embedSWF(options.swfUrl, options.element, 1, 1, '9.0.0');
-	},
-	
-	_onLoad: function() {
-		rjs._swfObject = document.getElementById(rjs._options.element);
-		rjs._options.onLoad();
-	},
-	
-	connect: function(hostname, port) {
-		rjs._swfObject.connect(hostname, port);
-	},
-	
-	_callback: function(callbackName) {
-		if (rjs._options[callbackName]) {
-			rjs._options[callbackName]();
-		}
-		else if (rjs._options.onEvent) {
-			rjs._options.onEvent(callbackName);
-		}
-	},
-	
-	_onData: function(data) {
-		rjs._options.onReceive(data);
-	},
-	
-	send: function(data) {
-		rjs._swfObject.send(data);
-	}
+  swfUrl: 'rsj.swf',
+
+  connect: function(hostname, port, options) {
+    this._hostname = hostname;
+    this._port = port;
+    rjs._init(options);
+  },
+
+  _init: function(options) {
+    this._options = options;
+
+    var element = document.createElement('div');
+    element.id = '_rjs_swf';
+    document.body.appendChild(element);
+
+    swfobject.embedSWF(rjs.swfUrl, '_rjs_swf', 1, 1, '9.0.0');
+  },
+
+  _onLoad: function() {
+    rjs._swfObject = document.getElementById('_rjs_swf');
+    rjs._swfObject.connect(rjs._hostname, rjs._port);
+  },
+
+  _callback: function(callbackName) {
+    if (rjs._options[callbackName]) {
+      rjs._options[callbackName]();
+    }
+    else if (rjs._options.onEvent) {
+      rjs._options.onEvent(callbackName);
+    }
+  },
+
+  _onData: function(data) {
+    rjs._options.onReceive(data);
+  },
+
+  send: function(data) {
+    rjs._swfObject.send(data);
+  },
+
+  disconnect: function() {
+    rjs._swfObject.close();
+  }
 };
