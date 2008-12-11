@@ -9,8 +9,8 @@ It aims to be fast, without the overhead common of other methods.
 
 # Building rjs
 
-rjs must be built with Adobe Flash CS3 or newer. Create a new ActionScript 3.0
-file and include rjs.as in the first frame. Publish the file as SWF.
+rsj can be built using the freely available Flex 3 SDK. Simply run
+flex_sdk_3/bin/mxmlc as/Rjs.as to generate a functional SWF file.
 
 # Using rjs
 
