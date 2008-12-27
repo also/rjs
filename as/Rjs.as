@@ -49,8 +49,8 @@ package {
     }
 
     private function onSocketConnect(event:Event):void {
-      doCallback('onSocketConnect');
       this.send('hi');
+      doCallback('onSocketConnect');
     }
 
     private function onSocketSecurityError(event:SecurityErrorEvent):void {
