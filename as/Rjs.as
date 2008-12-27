@@ -58,7 +58,13 @@ package {
     }
 
     private function onSocketData(event:DataEvent):void {
-      ExternalInterface.call("rjs._onData", event.data);
+      ExternalInterface.call("rjs._onData", escape(event.data));
+    }
+
+    // ExternalInterface doesn't escape backslashes in strings, which are
+    // passed as javascript string literals
+    private function escape(string:String):String {
+        return string.replace(/\\/g, '\\\\');
     }
 
     private function onSocketIoError(event:IOErrorEvent):void {
@@ -71,7 +77,7 @@ package {
     }
 
     private function doCallback(callback:String):void {
-      ExternalInterface.call('rjs._callback', callback);
+      ExternalInterface.call('rjs._callback', escape(callback));
     }
   
     public static function main():void {
