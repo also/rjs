@@ -33,7 +33,10 @@ var rjs = {
     element.id = '_rjs_swf';
     document.body.appendChild(element);
 
-    swfobject.embedSWF(rjs.swfUrl, '_rjs_swf', 1, 1, '9.0.0');
+    // internet explorer 6 will hang/crash if we embed flash in our new element 
+    window.setTimeout(function() {
+      swfobject.embedSWF(rjs.swfUrl, '_rjs_swf', 1, 1, '9.0.0');
+    }, 0);
   },
 
   _onLoad: function() {
